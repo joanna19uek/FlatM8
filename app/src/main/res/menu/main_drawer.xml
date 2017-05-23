@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_group"
+            android:icon="@drawable/grupa"
+            android:title="Grupa" />
+        <item
+            android:id="@+id/nav_costs"
+            android:icon="@drawable/wydatki"
+            android:title="Wydatki" />
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/przypomnienia"
+            android:title="Przypomnienia" />
+        <item
+            android:id="@+id/nav_budget"
+            android:icon="@drawable/budzet"
+            android:title="Budżet" />
+        <item
+            android:id="@+id/nav_bugs"
+            android:icon="@drawable/bugs"
+            android:title="Zgłoś błedy" />
+    </group>
+</menu>

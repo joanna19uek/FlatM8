@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Zaloguj" />
+        <activity android:name=".Zarejestruj" />
+        <activity
+            android:name=".Main"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Grupa" />
+        <activity android:name=".Wydatki" />
+        <activity android:name=".Przypomnienia" />
+        <activity android:name=".Budzet" />
+        <activity android:name=".Bugi" />
+        <activity android:name=".noweAktywnosci"></activity>
     </application>
 
 </manifest>
