@@ -27,7 +27,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/colorPrimary"
-        app:rippleColor="@drawable/plus"
         app:srcCompat="@drawable/plus" />
 
     <include layout="@layout/content_main" />

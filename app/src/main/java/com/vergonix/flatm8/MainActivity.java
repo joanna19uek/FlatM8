@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String USER = "com.vergonix.flatm8.USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
