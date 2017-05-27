@@ -1,5 +1,6 @@
 package com.vergonix.flatm8;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -37,6 +38,7 @@ public class noweAktywnosci extends AppCompatActivity {
 
         mateList = (Spinner) findViewById(R.id.flatMate);
         new MateList().execute();
+
     }
 
     private class MateList extends AsyncTask<Void, Void, Boolean> {

@@ -157,6 +157,8 @@ public class Grupa extends AppCompatActivity {
         }
     }
 
+    // ----------------------------------------------------------------------------------------
+
     private class Mate extends AsyncTask<Void, Void, Boolean> {
         String newUser;
 
