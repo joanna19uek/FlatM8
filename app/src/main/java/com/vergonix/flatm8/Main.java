@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -92,7 +93,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         @Override
         protected void onPostExecute(Boolean result) {
-            Toast toast = Toast.makeText(Main.this, toastMessage, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(Main.this, toastMessage, Toast.LENGTH_LONG);
             toast.show();
         }
 
