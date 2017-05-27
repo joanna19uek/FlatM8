@@ -18,18 +18,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Zaloguj" />
-        <activity android:name=".Zarejestruj" />
+        <activity
+            android:name=".Zaloguj"
+            android:label="Logowanie do grupy" />
+        <activity
+            android:name=".Zarejestruj"
+            android:label="Utwórz grupę" />
         <activity
             android:name=".Main"
-            android:label="@string/title_activity_main"
+            android:label="FlatM8"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Grupa" />
-        <activity android:name=".Wydatki" />
-        <activity android:name=".Przypomnienia" />
-        <activity android:name=".Budzet" />
+        <activity
+            android:name=".Grupa"
+            android:label="Twoja grupa" />
+        <activity
+            android:name=".Wydatki"
+            android:label="Wydatki" />
+        <activity
+            android:name=".Przypomnienia"
+            android:label="Przypomnienia" />
+        <activity
+            android:name=".Budzet"
+            android:label="Budżet" />
         <activity android:name=".Bugi" />
-        <activity android:name=".noweAktywnosci"></activity>
+        <activity
+            android:name=".noweAktywnosci"
+            android:label="Nowy wydatek" />
     </application>
 
 </manifest>

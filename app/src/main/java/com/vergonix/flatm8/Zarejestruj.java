@@ -22,9 +22,9 @@ import java.util.HashMap;
 import javax.net.ssl.HttpsURLConnection;
 
 public class Zarejestruj extends AppCompatActivity {
-    private String user, pass, repass;
+    private String group, pass, repass;
     private ProgressDialog pDialog;
-    private static final String TAG_EMAIL = "email";
+    private static final String TAG_NAME = "name";
     private static final String TAG_PASSWORD = "password";
     String url = "http://v-ie.uek.krakow.pl/~s187772/psm/rejestracja.php";
 
@@ -35,7 +35,7 @@ public class Zarejestruj extends AppCompatActivity {
     }
 
     public void noweKonto(View view) {
-        user = ((EditText) findViewById(R.id.nazwa)).getText().toString();
+        group = ((EditText) findViewById(R.id.nazwa)).getText().toString();
         pass = ((EditText) findViewById(R.id.haslo)).getText().toString();
         repass = ((EditText) findViewById(R.id.haslo2)).getText().toString();
 
@@ -47,7 +47,7 @@ public class Zarejestruj extends AppCompatActivity {
         }
     }
 
-    private class Register extends AsyncTask<Void, Void, Boolean> {
+    private class Register extends AsyncTask<Void, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -60,33 +60,37 @@ public class Zarejestruj extends AppCompatActivity {
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            boolean status = false;
+        protected String doInBackground(Void... params) {
             String response = "";
 
             HashMap<String, String> dane = new HashMap<String, String>();
-            dane.put(TAG_EMAIL, user);
+            dane.put(TAG_NAME, group);
             dane.put(TAG_PASSWORD, pass);
 
             response = postData(url, dane);
 
-            if (!response.equalsIgnoreCase("")) {
-                status = true;
-            } else {
-                status = false;
-            }
-
-            return status;
+            return response;
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
-            if (result) {
-                Intent loginIntent = new Intent(Zarejestruj.this, Zaloguj.class);
-                startActivity(loginIntent);
-            } else {
+        protected void onPostExecute(String result) {
+            if (result.equalsIgnoreCase("")) {
                 Toast toast = Toast.makeText(Zarejestruj.this, "Błąd w rejestracji. Spróbuj jeszcze raz.", Toast.LENGTH_SHORT);
                 toast.show();
+                pDialog.dismiss();
+            } else {
+                if (result.equalsIgnoreCase("Nazwa zajeta")) {
+                    Toast toast = Toast.makeText(Zarejestruj.this, "Ta nazwa grupy jest już zajęta. Wprowadź inną.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    pDialog.dismiss();
+                } else {
+                    Intent loginIntent = new Intent(Zarejestruj.this, Zaloguj.class);
+                    startActivity(loginIntent);
+                    pDialog.dismiss();
+                    ((EditText) findViewById(R.id.nazwa)).setText("");
+                    ((EditText) findViewById(R.id.haslo)).setText("");
+                    ((EditText) findViewById(R.id.haslo2)).setText("");
+                }
             }
         }
 

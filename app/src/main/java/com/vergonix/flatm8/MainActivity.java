@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String USER = "com.vergonix.flatm8.USER";
+    public static final String GROUP = "com.vergonix.flatm8.GROUP";
+    public static final String GROUPN = "com.vergonix.flatm8.GROUPN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

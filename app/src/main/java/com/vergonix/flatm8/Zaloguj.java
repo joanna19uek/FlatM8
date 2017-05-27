@@ -27,7 +27,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class Zaloguj extends AppCompatActivity {
     String group, password;
     private ProgressDialog pDialog;
-    private static final String TAG_EMAIL = "email";
+    private static final String TAG_NAME = "name";
     private static final String TAG_PASSWORD = "password";
     String url = "http://v-ie.uek.krakow.pl/~s187772/psm/logowanie.php";
 
@@ -62,7 +62,7 @@ public class Zaloguj extends AppCompatActivity {
             String response = "";
 
             HashMap<String, String> dane = new HashMap<String, String>();
-            dane.put(TAG_EMAIL, group);
+            dane.put(TAG_NAME, group);
             dane.put(TAG_PASSWORD, password);
 
             response = postData(url, dane);
@@ -74,26 +74,24 @@ public class Zaloguj extends AppCompatActivity {
                     if(u.length() == 1) {
                         JSONObject element = u.getJSONObject(0);
                         String id = element.getString("id");
+                        String name = element.getString("name");
 
                         if (Integer.valueOf(id) != 0) {
                             status = true;
-                            SharedPreferences pref = getSharedPreferences("USER", Context.MODE_PRIVATE);
+                            SharedPreferences pref = getSharedPreferences("GROUP", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
-                            editor.putString(MainActivity.USER, id);
+                            editor.putString(MainActivity.GROUP, id);
+                            editor.putString(MainActivity.GROUPN, name);
                             editor.apply();
                         }
                     } else {
                         status = false;
                     }
-
-
                 } catch (JSONException e) {
-                    // displayLoding(false);
                     e.printStackTrace();
                 } finally {
 
                 }
-
             } else {
                 status = false;
             }
@@ -104,9 +102,13 @@ public class Zaloguj extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
+                pDialog.dismiss();
                 Intent mainIntent = new Intent(Zaloguj.this, Main.class);
                 startActivity(mainIntent);
+                ((EditText) findViewById(R.id.nazwa)).setText("");
+                ((EditText) findViewById(R.id.haslo)).setText("");
             } else {
+                pDialog.dismiss();
                 Toast toast = Toast.makeText(Zaloguj.this, "Błąd w logowaniu. Spróbuj jeszcze raz.", Toast.LENGTH_SHORT);
                 toast.show();
             }

@@ -20,6 +20,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <include layout="@layout/content_main2" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="59dp"
@@ -28,7 +30,5 @@
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/plus" />
-
-    <include layout="@layout/content_main" />
 
 </android.support.design.widget.CoordinatorLayout>
