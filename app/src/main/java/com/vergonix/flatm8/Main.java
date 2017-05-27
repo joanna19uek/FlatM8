@@ -23,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,8 +48,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     private ListView list ;
     private ArrayAdapter<String> adapter ;
     public ArrayList<String> shoppings = new ArrayList<String>();
-    private TextView dateView;
-    private Calendar myCalendar;
+    private static final String TAG_GROUP_ID = "g_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +78,98 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         list = (ListView) findViewById(R.id.shopList);
 
         new LastCostList().execute();
+        new reminderNotifications().execute();
+    }
+
+    private class reminderNotifications extends AsyncTask<Void, Void, Boolean> {
+
+        private String toastMessage = "dupa blada";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            Toast toast = Toast.makeText(Main.this, toastMessage, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            boolean status = false;
+            String response = "";
+
+            SharedPreferences pref = getSharedPreferences("GROUP", Context.MODE_PRIVATE);
+            String groupId = pref.getString(MainActivity.GROUP, "brak");
+
+            HashMap<String, String> dane = new HashMap<String, String>();
+            dane.put(TAG_GROUP_ID, groupId);
+
+            response = postData("http://v-ie.uek.krakow.pl/~s187805/SM/testToast.php", dane);
+
+            if (!response.equalsIgnoreCase("")) {
+                try {
+                    JSONObject jRoot = new JSONObject(response);
+                    JSONArray u = jRoot.getJSONArray("reminders");
+
+                    if (u.length() == 0) {
+                        toastMessage = "Brak nadchodzących terminów zapłaty w najblższym tygodniu";
+                    } else {
+                        toastMessage = "Przypominamy o zbliżających się terminach zapłaty, sprawdź przypomnienia aby uzyskać więcej informacji";
+                    }
+
+                    status = true;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } finally {
+
+                }
+            } else {
+                status = false;
+            }
+
+            return status;
+        }
+
+        public String postData(String url, HashMap<String, String> data) {
+            URL requestUrl;
+            String response = "";
+
+            try {
+                requestUrl = new URL(url);
+                HttpURLConnection conn = (HttpURLConnection) requestUrl.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+                JSONObject root = new JSONObject(data);
+
+                String str = root.toString();
+                byte[] outputBytes = str.getBytes("UTF-8");
+                OutputStream os = conn.getOutputStream();
+                os.write(outputBytes);
+
+                int responseCode = conn.getResponseCode();
+
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
+                    String line;
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line = br.readLine()) != null) {
+                        response += line;
+                    }
+                } else {
+                    response = "";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return response;
+        }
     }
 
     @Override
