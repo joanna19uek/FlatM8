@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vergonix.flatm8.Budzet">
+    android:weightSum="1">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30sp"
+        android:layout_marginTop="10sp"
+        android:layout_weight="0.46"
+        app:srcCompat="@drawable/dolarsign" />
+
+    <TextView
+        android:id="@+id/budgetValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:text="Aktualna wartość budżetu: "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/savings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:text="W tym miesiącu udało się zaoszczędzić: "
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/newBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:ems="10"
+        android:hint="Nowa wartość budżetu"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="setBudget"
+        android:text="Zmień" />
+</LinearLayout>

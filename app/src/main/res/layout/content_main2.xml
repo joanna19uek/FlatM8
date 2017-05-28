@@ -9,20 +9,28 @@
     tools:showIn="@layout/app_bar_main"
     android:weightSum="1">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+    <com.github.lzyzsd.circleprogress.ArcProgress
+        android:id="@+id/arc_progress"
+        android:background="#00FFFFFF"
+        android:layout_marginTop="2sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.60" />
+        android:layout_height="280sp"
+        app:arc_finished_color="#66ff33"
+        app:arc_unfinished_color="#ff9900"
+        app:arc_stroke_width="25sp"
+        app:arc_progress="55"
+        app:arc_bottom_text="BUDGET"
+        app:arc_bottom_text_size="20sp"/>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.07"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:layout_height="31dp"
+        android:paddingBottom="2sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
         android:text="Ostatnie wydatki"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -30,8 +38,8 @@
     <ListView
         android:id="@+id/shopList"
         android:layout_width="match_parent"
-        android:layout_height="244dp"
-        android:layout_weight="0.74"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:layout_height="244sp"
+        android:layout_weight="0.07"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp" />
 </LinearLayout>
