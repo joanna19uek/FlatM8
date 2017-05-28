@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.vergonix.flatm8.Main"
-    tools:showIn="@layout/app_bar_main"
-    android:weightSum="1">
+    tools:showIn="@layout/app_bar_main">
 
     <com.github.lzyzsd.circleprogress.ArcProgress
         android:id="@+id/arc_progress"
-        android:background="#00FFFFFF"
-        android:layout_marginTop="2sp"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
         android:layout_width="match_parent"
         android:layout_height="280sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="2sp"
+        android:background="#00FFFFFF"
+        app:arc_bottom_text_size="20sp"
         app:arc_finished_color="#66ff33"
-        app:arc_unfinished_color="#ff9900"
-        app:arc_stroke_width="25sp"
         app:arc_progress="55"
-        app:arc_bottom_text="BUDGET"
-        app:arc_bottom_text_size="20sp"/>
+        app:arc_stroke_width="25sp"
+        app:arc_unfinished_color="#ff9900" />
 
     <TextView
         android:id="@+id/textView4"
@@ -31,7 +31,7 @@
         android:paddingBottom="2sp"
         android:paddingLeft="10sp"
         android:paddingRight="10sp"
-        android:text="Ostatnie wydatki"
+        android:text="Ostatnie wydatki i wykorzystanie budżetu"
         android:textSize="16sp"
         android:textStyle="bold" />
 

@@ -6,10 +6,14 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.lzyzsd.circleprogress.ArcProgress;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +24,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -33,6 +39,7 @@ public class Budzet extends AppCompatActivity {
     private static final String TAG_DATE = "date";
     private String newBudget, savings, budgetValue;
     private TextView budgetView, savingsView;
+    NumberFormat formatter = new DecimalFormat("#0.00");
 
     String urlDodajbudzet = "http://v-ie.uek.krakow.pl/~s187772/psm/ustawBudzet.php",
             urlSumaWydatkow = "http://v-ie.uek.krakow.pl/~s187772/psm/sumaWydatkow.php";
@@ -47,6 +54,11 @@ public class Budzet extends AppCompatActivity {
 
         new SavedBudget().execute();
     }
+
+    public String getBudget() {
+        return budgetValue;
+    }
+
 
     public void setBudget(View view) {
         newBudget = ((EditText) findViewById(R.id.newBudget)).getText().toString();
@@ -182,7 +194,7 @@ public class Budzet extends AppCompatActivity {
                         }
 
                         if (expenses != 0.00) {
-                            savings = String.valueOf(Double.parseDouble(budget) - expenses) + " zł";
+                            savings = String.valueOf(formatter.format(Double.parseDouble(budget) - expenses)) + " zł";
                         }
 
                     }

@@ -33,6 +33,7 @@ public class Grupa extends AppCompatActivity {
     private static final String TAG_ID = "id";
     private static final String TAG_GROUP = "group";
     private static final String TAG_NAME = "name";
+    private String empty;
 
     String urlGrupa = "http://v-ie.uek.krakow.pl/~s187772/psm/grupy.php";
     String urlDodajDoGrupy = "http://v-ie.uek.krakow.pl/~s187772/psm/dodajDoGrupy.php";
@@ -51,8 +52,14 @@ public class Grupa extends AppCompatActivity {
     }
 
     public void dodaj(View view) {
-        mates.clear();
-        new Mate().execute();
+        empty = ((EditText) findViewById(R.id.user)).getText().toString();
+        if(empty.equals("")) {
+            Toast toast = Toast.makeText(Grupa.this, "Nie podano żadnej nazwy użytkownika", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            mates.clear();
+            new Mate().execute();
+        }
     }
 
     private class MateList extends AsyncTask<Void, Void, Boolean> {

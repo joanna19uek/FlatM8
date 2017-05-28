@@ -2,13 +2,22 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\User\.android\build-cache\7f9199e20614987c20c64bd2e96ff747d0492e47\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="D:\Projekty\PSM\FlatM8\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="f200454bd6851899efe021d2a4673959986edaed">
-        <dex dex="C:\Users\User\AndroidStudioProjects\Projekt2\FlatM8\app\build\intermediates\pre-dexed\debug\classes_09a715b4a8358535429e1d92f3d0e054644c341b.jar" />
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="D:\Projekty\PSM\FlatM8\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_8c9693d4a5f08a460581513f5fec943b87484b03\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Projekty\PSM\FlatM8\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="0fa77c89253321227b778cdcbc8508e603e3603d">
+        <dex dex="D:\Projekty\PSM\FlatM8\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c6b0fce16b9c4dbc9b6073bd8034842c4368437d\classes.dex" />
     </item>
 
 </items>

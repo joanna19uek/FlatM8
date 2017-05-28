@@ -9,14 +9,15 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="277dp"
+        android:layout_height="243dp"
         android:layout_marginBottom="50px"
-        app:srcCompat="@drawable/flatm8logo" />
+        app:srcCompat="@drawable/bgs" />
 
     <EditText
         android:id="@+id/nazwa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
         android:ems="10"
         android:hint="Nazwa Grupy"
         android:inputType="textEmailAddress" />
