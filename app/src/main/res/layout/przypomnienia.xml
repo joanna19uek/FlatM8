@@ -8,6 +8,8 @@
         android:id="@+id/textView12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:text="Aktualnie ustawione przypomnienia"
         android:textSize="20sp" />
 
@@ -15,12 +17,16 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="157dp"
-        android:layout_weight="0.40" />
+        android:layout_weight="0.40"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:text="Treść Przypomnienia" />
 
     <EditText
@@ -29,12 +35,16 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="powiadomienie"
-        android:inputType="text" />
+        android:inputType="text"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:text="Wybierz termin przypomnienia" />
 
     <EditText
@@ -44,12 +54,16 @@
         android:ems="10"
         android:focusable="false"
         android:hint="Data"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:text="Kwota do zapłaty" />
 
     <EditText
@@ -58,7 +72,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Kwota w PLN"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
 
     <Button
         android:id="@+id/button6"
