@@ -15,26 +15,42 @@
         app:srcCompat="@drawable/dolarsign" />
 
     <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aktualna wartość budżetu:"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/budgetValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20sp"
-        android:text="Aktualna wartość budżetu: "
-        android:textSize="18sp" />
+        android:gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="W tym miesiącu udało się zaoszczędzić:"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/savings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:text="W tym miesiącu udało się zaoszczędzić: "
-        android:textSize="18sp" />
+        android:gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/newBudget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
         android:ems="10"
         android:hint="Nowa wartość budżetu"
         android:inputType="number" />

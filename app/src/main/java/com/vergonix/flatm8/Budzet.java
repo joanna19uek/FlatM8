@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -27,7 +30,9 @@ public class Budzet extends AppCompatActivity {
 
     private static final String TAG_GROUP_ID = "g_id";
     private static final String TAG_BUDGET = "budget";
+    private static final String TAG_DATE = "date";
     private String newBudget, savings, budgetValue;
+    private TextView budgetView, savingsView;
 
     String urlDodajbudzet = "http://v-ie.uek.krakow.pl/~s187772/psm/ustawBudzet.php",
             urlSumaWydatkow = "http://v-ie.uek.krakow.pl/~s187772/psm/sumaWydatkow.php";
@@ -37,12 +42,14 @@ public class Budzet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.budzet);
 
-        newBudget = ((EditText) findViewById(R.id.newBudget)).getText().toString();
-        budgetValue = ((TextView) findViewById(R.id.budgetValue)).getText().toString();
-        savings = ((TextView) findViewById(R.id.savings)).getText().toString();
+        budgetView = (TextView) findViewById(R.id.budgetValue);
+        savingsView = (TextView) findViewById(R.id.savings);
+
+        new SavedBudget().execute();
     }
 
     public void setBudget(View view) {
+        newBudget = ((EditText) findViewById(R.id.newBudget)).getText().toString();
         new Budget().execute();
     }
 
@@ -82,7 +89,9 @@ public class Budzet extends AppCompatActivity {
                 ((TextView) findViewById(R.id.budgetValue)).setText(budgetValue);
                 ((TextView) findViewById(R.id.savings)).setText(savings);
                 ((EditText) findViewById(R.id.newBudget)).setText("");
-                new Budzet.savedBudget().execute();
+                new SavedBudget().execute();
+                Toast toast = Toast.makeText(Budzet.this, "Zapisano", Toast.LENGTH_SHORT);
+                toast.show();
             } else {
                 Toast toast = Toast.makeText(Budzet.this, "Nie udało się zmienić wartości budżetu. Spróbuj jeszcze raz.", Toast.LENGTH_SHORT);
                 toast.show();
@@ -129,7 +138,7 @@ public class Budzet extends AppCompatActivity {
         }
     }
 
-    private class savedBudget extends AsyncTask<Void, Void, Boolean> {
+    private class SavedBudget extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -137,15 +146,19 @@ public class Budzet extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-
             boolean status = false;
             String response = "";
 
             SharedPreferences pref = getSharedPreferences("GROUP", Context.MODE_PRIVATE);
             String groupId = pref.getString(MainActivity.GROUP, "brak");
 
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+            String date = sdf.format(cal.getTime());
+
             HashMap<String, String> dane = new HashMap<String, String>();
             dane.put(TAG_GROUP_ID, groupId);
+            dane.put(TAG_DATE, date);
 
             response = postData(urlSumaWydatkow, dane);
 
@@ -155,14 +168,23 @@ public class Budzet extends AppCompatActivity {
                     JSONArray u = jRoot.getJSONArray("expenses");
 
                     if (u.length() == 0) {
-                        budgetValue += " Budżet nie został ustawiony";
+                        budgetValue = "Budżet nie został jeszcze ustawiony";
+                        savings = "0 zł";
                     } else {
                         JSONObject element = u.getJSONObject(0);
                         String budget = element.getString("budget");
                         Double expenses = Double.parseDouble(element.getString("costSum"));
 
-                        budgetValue += budget;
-                        savings += " " + (Double.parseDouble(budget) - expenses);
+                        if (budget.equalsIgnoreCase("brak")) {
+                            budgetValue = "Budżet nie został jeszcze ustawiony";
+                        } else {
+                            budgetValue = budget + " zł";
+                        }
+
+                        if (expenses != 0.00) {
+                            savings = String.valueOf(Double.parseDouble(budget) - expenses) + " zł";
+                        }
+
                     }
 
                     status = true;
@@ -179,8 +201,11 @@ public class Budzet extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                budgetView.setText(budgetValue);
+                savingsView.setText(savings);
+            }
         }
 
         public String postData(String url, HashMap<String, String> data) {
